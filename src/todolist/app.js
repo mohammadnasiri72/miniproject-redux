@@ -1,13 +1,23 @@
+// import {addTodo, doTodo, filterAllTodo, filterCompeleteTodo, filterIncompeleteTodo, removeTodo} from './actionType'
+// import { addTodoList } from './todo-func'
 
 
+const addTodo = 'ADD_TODO'
+const removeTodo = 'REMOVE_TODO'
+const doTodo = 'DO_TODO'
+const filterAllTodo = 'FILTER_ALL_TODO'
+const filterCompeleteTodo = 'FILTER_COMPELETE_TODO'
+const filterIncompeleteTodo = 'FILTER_INCOMPELETE_TODO'
 
 
+function addTodoList(e){
+    return {
+        type: addTodo ,
+        title: e
+    }
+}
 
 
-
-
-import {addTodo, doTodo, filterAllTodo, filterCompeleteTodo, filterIncompeleteTodo, removeTodo} from './actionType'
-import { addTodoList } from './todo-func'
 
 const add = document.querySelector(".icon-add")
 const newWork = document.querySelector(".input-new-work")
@@ -17,26 +27,26 @@ const boxTodo = document.querySelector(".box-todo")
 
 
 
-function todoListReducer(state=[] , action){
+let todoListReducer = (state=[] , action)=>{
     switch (action.type) {
         case addTodo:{
             return  [...state, action.title]
         }
-        // case removeTodo:{
-        //     return state
-        // }
-        // case doTodo:{
-        //     return state
-        // }
-        // case filterAllTodo:{
-        //     return state
-        // }
-        // case filterCompeleteTodo:{
-        //     return state
-        // }
-        // case filterIncompeleteTodo:{
-        //     return state
-        // }
+        case removeTodo:{
+            return state
+        }
+        case doTodo:{
+            return state
+        }
+        case filterAllTodo:{
+            return state
+        }
+        case filterCompeleteTodo:{
+            return state
+        }
+        case filterIncompeleteTodo:{
+            return state
+        }
 
         default:{
             return state
@@ -47,80 +57,17 @@ function todoListReducer(state=[] , action){
 
 const store = Redux.createStore(todoListReducer)
 
-console.log(store);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import {addTodo} from './todo-func'
-
-
-
-
-
-
-// const todoreducer = (state = [], action) => {
-//     switch (action.type) {
-//         case addTypeAction: {
-//             return [...state, action.title]
-//         }
-//         default: {
-//             return state
-//         }
-//     }
-// }
-// const store = Redux.createStore(todoreducer)
-
-
-
-
 
 add.addEventListener("click", () => {
     const newTodoWork = newWork.value
     newWork.value =""
     store.dispatch(addTodoList(newTodoWork))
     const todoes = store.getState()
-    console.log(todoes);
     generateTodo(todoes)
 })
 
 
 function generateTodo(e) {
-    console.log(e);
     boxTodo.innerHTML = ""
     e.forEach(item => {
         boxTodo.innerHTML += `
@@ -128,13 +75,13 @@ function generateTodo(e) {
             <p class="text-2xl">${item}</p>
             <div class="flex flex-col">
                 <span class="material-symbols-outlined rounded-lg m-1 p-1 bg-red-700 cursor-pointer text-white icon-delete">delete</span>
-                <span onclick={todoDone()} class="material-symbols-outlined rounded-lg m-1 p-1 bg-green-600 cursor-pointer icon-done">done</span>
+                <span onclick={todoDone} class="material-symbols-outlined rounded-lg m-1 p-1 bg-green-600 cursor-pointer icon-done">done</span>
             </div>
         </div>
         `
     });
    
 }
-// const todoDone = ()=>{
-//     console.log(del);
-// }
+const todoDone = ()=>{
+    console.log("hgjh");
+}
